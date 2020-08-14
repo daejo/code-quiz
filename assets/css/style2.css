@@ -26,3 +26,11 @@
     color: white;
     width: 100%;
 }
+
+.correct {
+    background-color: rgb(0, 90, 0);
+}
+
+.incorrect {
+    background-color: rgb(141, 0, 0);
+}
