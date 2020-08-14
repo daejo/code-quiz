@@ -20,7 +20,7 @@ h4 {
 
 h1 {
     font-size: 5.4rem;
-    color: #56a5eb;
+    color: purple;
     margin-bottom: 5rem;
 }
 
@@ -75,4 +75,31 @@ h3 {
 
 .hidden {
     display: none;
+}
+
+/* BUTTONS */
+
+.btn {
+    font-size: 1.8rem;
+    padding: 1rem;
+    width: 20rem;
+    text-align: center;
+    border: 0.1rem solid purple;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: purple;
+    background-color: white;
+}
+
+.btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(140, 1, 142, 1);
+    transform: translateY(-0.1rem)
+    transition: transform 150ms;
+}
+
+.btn[disabled]:hover {
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
 }
