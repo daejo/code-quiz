@@ -1,5 +1,11 @@
-const question = document.getElementById("question");
-const choices = Array.from(document.getElementsByClassName("choice-text"));
+var question = document.getElementById("question");
+var choices = Array.from(document.getElementsByClassName("choice-text"));
+var startButton = document.getElementById("start"); //Links html start button with variable.
+var timerEl = document.querySelector("#timer"); //Links timer display with variable 
+var quizTime = 180; //Number of seconds
+var score = []; //Scoreboard
+var right; //Number of correct answers
+var wrong; //Number of incorrect answers
 
 var currentQuestion = {};
 var acceptingAnswers = true;
@@ -33,7 +39,7 @@ var questions = [
         answer: 3 
     },
     {
-        question: "String values ust be enclosed within _____ when being assigned to variables .",
+        question: "String values must be enclosed within _____ when being assigned to variables .",
         choice1: "commas",
         choice2: "curly brackets",
         choice3: "quotes",
@@ -53,14 +59,31 @@ var questions = [
 var CORRECT_BONUS = 10;
 var MAX_QUESTIONS = 3;
 
-startGame = () => {
+/***** Timer functions */
+function startTimer() {
+    var timeInterval = setInterval(function() { //Sets up seconds timer. 1second = 1000milliseconds
+    if (quizTime > 1) {
+        timerEl.textContent = "Time: " + quizTime;
+        quizTime--;
+    } else if (quizTime === 1) {
+        timerEl.textContent = "Time: " + quizTime;
+        quizTime--;
+    } else {
+        timerEl.textContent = "";
+        clearInterval(timeInterval);
+        displayMessage();
+    }
+    }, 1000);
+};
+
+function startGame() {
     questionCounter = 0;
     score = 0;
     availableQuestions = [...questions];
     getNewQuestion();
 };
 
-getNewQuestion = () => {
+function getNewQuestion() { //Loads next question.
 
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         return window.location.assign("/end.html")
@@ -92,7 +115,7 @@ choices.forEach(choice => {
         var classToApply = 
             selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
-        selectedChoice.parentElement.classList.add(classToApply);
+        selectedChoice.parentElement.classList.add(classToApply); //Changes choice color depending if its right or wrong.
         setTimeout ( () => {
             selectedChoice.parentElement.classList.remove(classToApply);
             getNewQuestion();
@@ -101,5 +124,5 @@ choices.forEach(choice => {
     });
 });
 startGame();
-
+startTimer();
  
