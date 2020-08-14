@@ -2,18 +2,19 @@ var question = document.getElementById("question");
 var choices = Array.from(document.getElementsByClassName("choice-text"));
 var startButton = document.getElementById("start"); //Links html start button with variable.
 var timerEl = document.querySelector("#timer"); //Links timer display with variable 
-var quizTime = 180; //Number of seconds
+var quizTime = 180; //Number of seconds 180seconds
 var score = []; //Scoreboard
 var right; //Number of correct answers
 var wrong; //Number of incorrect answers
-
+var CORRECT_BONUS = 10;
+var MAX_QUESTIONS = 4;
 var currentQuestion = {};
 var acceptingAnswers = true;
 var score = "0";
 var questionCounter = 0;
 var availableQuestions = [];
 
-var questions = [
+var questions = [ //Questions array
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
         choice1: "JavaScript",
@@ -39,7 +40,7 @@ var questions = [
         answer: 3 
     },
     {
-        question: "String values must be enclosed within _____ when being assigned to variables .",
+        question: "String values must be enclosed within _____ when being assigned to variables.",
         choice1: "commas",
         choice2: "curly brackets",
         choice3: "quotes",
@@ -47,7 +48,7 @@ var questions = [
         answer: 3  
     },
     {
-        question: "Arrays in JavaScript can be used to store",
+        question: "Arrays in JavaScript can be used to store:",
         choice1: "numbers and strings",
         choice2: "other arrays",
         choice3: "booleans",
@@ -56,11 +57,7 @@ var questions = [
     }
 ]
 
-var CORRECT_BONUS = 10;
-var MAX_QUESTIONS = 3;
-
-/***** Timer functions */
-function startTimer() {
+function startTimer() { //Timer function
     var timeInterval = setInterval(function() { //Sets up seconds timer. 1second = 1000milliseconds
     if (quizTime > 1) {
         timerEl.textContent = "Time: " + quizTime;
@@ -71,12 +68,13 @@ function startTimer() {
     } else {
         timerEl.textContent = "";
         clearInterval(timeInterval);
-        displayMessage();
+        alert("YOU RAN OUT OF TIME! TRY AGAIN.");
+        location.reload()
     }
     }, 1000);
 };
 
-function startGame() {
+function startGame() { //Starts and resets game.
     questionCounter = 0;
     score = 0;
     availableQuestions = [...questions];
@@ -90,7 +88,7 @@ function getNewQuestion() { //Loads next question.
     }
 
     questionCounter++;
-    var questionIndex = Math.floor(Math.random() * availableQuestions.length);
+    var questionIndex = Math.floor(Math.random() * availableQuestions.length); //Equation to get random questions
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
 
@@ -104,7 +102,7 @@ function getNewQuestion() { //Loads next question.
     acceptingAnswers = true;
 };
 
-choices.forEach(choice => {
+choices.forEach(choice => { //function for choices made.
     choice.addEventListener("click", e => {
         if (!acceptingAnswers) return;
 
@@ -125,4 +123,5 @@ choices.forEach(choice => {
 });
 startGame();
 startTimer();
+
  
