@@ -39,6 +39,15 @@ h3 {
     font-weight: 500;
 }
 
+#code{
+     margin-bottom: 2rem;
+}
+#instructions {
+    font-size: 2rem;
+    color: purple;
+    margin-bottom: 2rem;
+}
+
 /*UTILITIES*/
 
 .container {
@@ -85,11 +94,12 @@ h3 {
     padding: 1rem;
     width: 20rem;
     text-align: center;
-    border: 0.1rem solid purple;
+    border: 0.1rem solid violet;
     margin-bottom: 1rem;
     text-decoration: none;
-    color: purple;
-    background-color: white;
+    color: white;
+    background-color: purple;
+    border-radius: 1rem;
 }
 
 .btn:hover {
@@ -113,10 +123,6 @@ h3 {
     padding-top: 1.5rem;
 }
 
-/* #hud2 {
-    display: inline-block;
-} */
-
 #hud a {
     color: violet;
     text-decoration: none;
@@ -132,8 +138,8 @@ h3 {
 
 p {
     display: inline-block;
-    padding-right: 1.5rem;
     color: violet;
+    text-align: center;
 }
 
 #score {

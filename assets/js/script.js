@@ -10,7 +10,7 @@ var wrong; //Number of incorrect answers
 var CORRECT_BONUS = 10;
 var MAX_QUESTIONS = 5;
 var acceptingAnswers = true;
-// var score = "0";
+var score = "0";
 var questionCounter = 0;
 var availableQuestions = [];
 

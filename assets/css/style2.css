@@ -5,6 +5,7 @@
     width: 100%;
     font-size: 1.8rem;
     border: 0.1rem solid rgba(140, 1, 142, 1);
+    border-radius: 1rem;
     
 }
 
@@ -19,6 +20,7 @@
     padding: 1.5rem 2.5rem;
     background-color: purple;
     color: white;
+    border-radius: 1rem;
 }
 
 .choice-text {

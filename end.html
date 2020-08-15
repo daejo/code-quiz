@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,13 +10,13 @@
 <body>
     <div class="container">
         <div id="end" class="flex-center flex-column">
-            <h1 id="finalScore">0</h1>
+            <h2>FINAL SCORE</h2><h1 id="finalScore">0</h1>
             <form>
                 <input type="text" name="username" id="username" placeholder="Your Name"/>
-                <button type="submit" class="btn" id="submitScore" onclick="saveHighScore(event)" disabled>Submit</button>
+                <button type="submit" class="btn" id="submitScore" onclick="saveHighScore(event)">Submit</button>
             </form>
             <a class="btn" href="./quiz.html">Try Again</a>
-            <a class="btn" href="./index.html">Main Menu</a>
+            <a class="btn" href="./highscore.html">Highscores</a>
         </div>
     </div>
     <script src="assets/js/end.js"></script>
