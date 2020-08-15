@@ -1,5 +1,6 @@
 var question = document.getElementById("question");
 var choices = Array.from(document.getElementsByClassName("choice-text"));
+var scoreText = document.getElementById("score");
 var startButton = document.getElementById("start"); //Links html start button with variable.
 var timerEl = document.querySelector("#timer"); //Links timer display with variable 
 var quizTime = 180; //Number of seconds 180seconds
@@ -7,7 +8,8 @@ var score = []; //Scoreboard
 var right; //Number of correct answers
 var wrong; //Number of incorrect answers
 var CORRECT_BONUS = 10;
-var MAX_QUESTIONS = 4;
+var DECREMENT_TIME = 10;
+var MAX_QUESTIONS = 5;
 var currentQuestion = {};
 var acceptingAnswers = true;
 var score = "0";
@@ -60,16 +62,16 @@ var questions = [ //Questions array
 function startTimer() { //Timer function
     var timeInterval = setInterval(function() { //Sets up seconds timer. 1second = 1000milliseconds
     if (quizTime > 1) {
-        timerEl.textContent = "Time: " + quizTime;
+        timerEl.textContent = quizTime;
         quizTime--;
     } else if (quizTime === 1) {
-        timerEl.textContent = "Time: " + quizTime;
+        timerEl.textContent = quizTime;
         quizTime--;
     } else {
         timerEl.textContent = "";
         clearInterval(timeInterval);
         alert("YOU RAN OUT OF TIME! TRY AGAIN.");
-        location.reload()
+        location.reload() //Reloads page when time runs out.
     }
     }, 1000);
 };
@@ -84,11 +86,13 @@ function startGame() { //Starts and resets game.
 function getNewQuestion() { //Loads next question.
 
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+        localStorage.setItem("mostRecentScore", score);
+
         return window.location.assign("/end.html")
     }
 
     questionCounter++;
-    var questionIndex = Math.floor(Math.random() * availableQuestions.length); //Equation to get random questions
+    var questionIndex = Math.floor(Math.random() * availableQuestions.length); //Function to get random questions
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
 
@@ -110,8 +114,14 @@ choices.forEach(choice => { //function for choices made.
         var selectedChoice = e.target;
         var selectedAnswer = selectedChoice.dataset["number"];
 
-        var classToApply = 
+        var classToApply = //changes the classes accordingly if its correct or incorrect.
             selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+
+            if(classToApply === "correct") {
+                incrementScore(CORRECT_BONUS);
+            }else if(classToApply === "incorrect") {
+                decrementScore(DECREMENT_TIME);
+            };
 
         selectedChoice.parentElement.classList.add(classToApply); //Changes choice color depending if its right or wrong.
         setTimeout ( () => {
@@ -121,6 +131,17 @@ choices.forEach(choice => { //function for choices made.
         
     });
 });
+
+incrementScore = num => {
+    score += num;
+    scoreText.innerText = score;
+}
+
+decrementTime = num => {
+    timer -= num;
+    timerEl.innerText = timer;
+}
+
 startGame();
 startTimer();
 
