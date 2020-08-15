@@ -8,11 +8,9 @@ var score = []; //Scoreboard
 var right; //Number of correct answers
 var wrong; //Number of incorrect answers
 var CORRECT_BONUS = 10;
-var DECREMENT_TIME = 10;
 var MAX_QUESTIONS = 5;
-var currentQuestion = {};
 var acceptingAnswers = true;
-var score = "0";
+// var score = "0";
 var questionCounter = 0;
 var availableQuestions = [];
 
@@ -92,7 +90,7 @@ function getNewQuestion() { //Loads next question.
     }
 
     questionCounter++;
-    var questionIndex = Math.floor(Math.random() * availableQuestions.length); //Function to get random questions
+    var questionIndex = Math.floor(Math.random() * availableQuestions.length); //Function to get random question
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
 
@@ -117,11 +115,11 @@ choices.forEach(choice => { //function for choices made.
         var classToApply = //changes the classes accordingly if its correct or incorrect.
             selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
-            if(classToApply === "correct") {
+            if(classToApply === "correct") { //Identifies if your answer is correct
                 incrementScore(CORRECT_BONUS);
-            }else if(classToApply === "incorrect") {
-                decrementScore(DECREMENT_TIME);
-            };
+            }else if(classToApply === "incorrect") { //Identifies if answer is incorrect
+                quizTime = quizTime - 10 //Subtracts 10seconds to your time when incorrect.
+            }
 
         selectedChoice.parentElement.classList.add(classToApply); //Changes choice color depending if its right or wrong.
         setTimeout ( () => {
@@ -132,15 +130,10 @@ choices.forEach(choice => { //function for choices made.
     });
 });
 
-incrementScore = num => {
+incrementScore = num => { //Adds 10 to score once correct
     score += num;
     scoreText.innerText = score;
-}
-
-decrementTime = num => {
-    timer -= num;
-    timerEl.innerText = timer;
-}
+};
 
 startGame();
 startTimer();
